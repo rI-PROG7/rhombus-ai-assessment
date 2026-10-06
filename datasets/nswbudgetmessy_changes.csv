@@ -1,0 +1,55 @@
+category,issue,src_row,project,column,original,injected
+missing,AgencyName blanked,655,Transport Service Systems - Passes and Schemes Reform and Customer Entitlement Management,AgencyName,Transport for NSW,
+missing,AgencyName blanked,115,Building Improvements,AgencyName,"Department of Finance, Services and Innovation",
+missing,AgencyName blanked,26,Cairnsfoot School Relocation,AgencyName,Department of Education,
+missing,Allocation blanked,313,Crisis Accommodation,Allocation201516,12880,
+missing,Allocation blanked,282,Royal North Shore Hospital Clinical Services Building,Allocation201516,4429,
+missing,Null placeholder 'N/A' in LGA,141,Whole of Government Data Centre,LGA,Parramatta,N/A
+missing,Null placeholder 'n/a' in LGA,90,Hunter Sports High School Upgrade,LGA,Lake Macquarie,n/a
+missing,Null placeholder '-' in LGA,527,"Mulgoa Road, Andrews Road to Glenmore Park (Planning)",LGA,Penrith,-
+missing,Null placeholder 'NULL' in Type,109,Stronger Together 2 Accommodation for People with Disability: Large Residential Centre Redevelopments - Metro,Type,Work-In-Progress,NULL
+missing,Null placeholder 'unknown' in Type,94,Mowbray Public School Upgrade,Type,Work-In-Progress,unknown
+formatting,Region lowercase,536,Sydney Tropical Centre Refurbishment,Region,Metropolitan Sydney,metropolitan sydney
+formatting,Region lowercase,32,Rowland Hassall School Relocation,Region,Metropolitan Sydney,metropolitan sydney
+formatting,Region lowercase,30,Narellan School (new school),Region,Metropolitan Sydney,metropolitan sydney
+formatting,Region lowercase,81,Bourke Street Public School Upgrade,Region,Metropolitan Sydney,metropolitan sydney
+formatting,Region uppercase,206,Enhancement of Water Infrastructure,Region,Hunter,HUNTER
+formatting,Region uppercase,208,Housing Acceleration Fund 2 Upgrades,Region,Hunter,HUNTER
+formatting,Type variant spelling,389,Lidcombe to Granville - Corridor Upgrade,Type,Work-In-Progress,work in progress
+formatting,Type variant spelling,588,Property Management and Acquisition,Type,Work-In-Progress,work in progress
+formatting,Type variant spelling,31,Narrabri Public School Upgrade,Type,Work-In-Progress,work in progress
+formatting,AgencyName extra leading/trailing spaces,593,Upgrade Reliability of Sewage Treatment Plants,AgencyName,Sydney Water Corporation,  Sydney Water Corporation 
+formatting,AgencyName extra leading/trailing spaces,216,General Land Acquisition,AgencyName,Minister Administering the Environmental Planning and Assessment Act,  Minister Administering the Environmental Planning and Assessment Act 
+formatting,AgencyName extra leading/trailing spaces,687,Development of Bungarribee Park,AgencyName,Western Sydney Parklands Trust,  Western Sydney Parklands Trust 
+formatting,ProjectName double internal space,581,Maintain  Water Distribution Systems,ProjectName,Maintain Water Distribution Systems,Maintain  Water Distribution Systems
+formatting,ProjectName double internal space,449,"New  England Highway, Muswellbrook Bypass (Planning)",ProjectName,"New England Highway, Muswellbrook Bypass (Planning)  ","New  England Highway, Muswellbrook Bypass (Planning)"
+formatting,ProjectName double internal space,242,Electronic  Medical Record User Interface Enhancements,ProjectName,Electronic Medical Record User Interface Enhancements,Electronic  Medical Record User Interface Enhancements
+formatting,Amount with $ and thousands separator,345,Technology Asset Replacement Program,Allocation201516,13000,"$13,000"
+formatting,Amount with $ and thousands separator,440,Bells Line of Road Stage 2 (Chifley Road) (Planning),Allocation201516,2000,"$2,000"
+formatting,Amount with $ and thousands separator,232,Byron Central Hospital,Allocation201516,57366,"$57,366"
+formatting,Amount with $ and thousands separator,573,Upgrade of Lifts and Escalators,Allocation201516,5800,"$5,800"
+formatting,Amount with thousands separator,684,Water For Rivers - Other Water Saving Projects,ETC,22647,"22,647"
+formatting,Amount with thousands separator,13,Fit-out for Office Accommodation,ETC,1000,"1,000"
+formatting,StartYear as financial-year text (e.g. 2015-16),181,Container Deposit Registration System,StartYear,2015,2015-16
+formatting,StartYear as financial-year text (e.g. 2015-16),598,Nepean College Kingswood TAFE - Health and Support Services Facilities,StartYear,2012,2012-13
+formatting,StartYear as financial-year text (e.g. 2015-16),377,Centrally Managed Operational Vehicle Fleet,StartYear,2012,2012-13
+invalid,Negative allocation,328,Gunnedah Police Station,Allocation201516,200,-200
+invalid,Negative allocation,196,Wollongong Fire Station Refurbishment,Allocation201516,500,-500
+invalid,Negative allocation,263,Lismore Hospital Redevelopment Stage 3B,Allocation201516,30207,-30207
+invalid,Negative ETC,697,Western Plains Zoo - Construction and Restoration Projects,ETC,34842,-34842
+invalid,Non-numeric 'TBC' in ETC,561,Ferry Fleet Replacement,ETC,50610,TBC
+invalid,Non-numeric 'TBA' in ETC,213,Enhancements to Government Information (Public Access) Management System,ETC,300,TBA
+invalid,Non-numeric 'N/A' in EstSpend,114,Accommodation Strategy,EstSpendTo20150630,5011,N/A
+invalid,StartYear later than CompletionYear (swapped) (CompletionYear 2019->2010),57,Acquisition of Works of Art,StartYear,2010,2019
+invalid,StartYear later than CompletionYear (swapped) (CompletionYear 2021->2015),225,Blacktown and Mount Druitt Hospitals Redevelopment Stage 2,StartYear,2015,2021
+invalid,Impossible CompletionYear (typo),117,Business Volume Future Growth Program,CompletionYear,2019,2105
+invalid,Impossible StartYear,538,Customer Service System Integration,StartYear,2014,1899
+invalid,Spend + allocation exceeds ETC,634,Financial Management Transformation Program,Allocation201516,46300,162870
+invalid,Spend + allocation exceeds ETC,224,Blacktown / Mount Druitt Hospitals Redevelopment Stage 1,Allocation201516,27573,777561
+duplicate,Exact duplicate row,663,Catchments Upgrade,(all),,copy inserted
+duplicate,Exact duplicate row,297,Wagga Wagga Rural Referral Hospital Redevelopment,(all),,copy inserted
+duplicate,Exact duplicate row,50,10-Year Capital Maintenance Program,(all),,copy inserted
+duplicate,Exact duplicate row,506,Bells Line of Road Castlereagh Connection Corridor Preservation,(all),,copy inserted
+duplicate,Exact duplicate row,594,Water Meter Replacement Program,(all),,copy inserted
+duplicate,Near-duplicate: ProjectName uppercased,143,Coastal Infrastructure Program,ProjectName,Coastal Infrastructure Program,COASTAL INFRASTRUCTURE PROGRAM
+duplicate,Near-duplicate: trailing space in Location,422,"Easing Sydney's Congestion, Pinch Points and Clearways Package 3 (Planning)",Location,Various,Various 
