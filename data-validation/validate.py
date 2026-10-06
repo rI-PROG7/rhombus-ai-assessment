@@ -263,6 +263,12 @@ def check_semantic(rep, out, ref_path):
         both = sp.notna() & etc.notna() & (etc > 0)
         share = float((sp[both] > etc[both]).mean()) if both.any() else 0.0
         rep.check(s, "Spend to date rarely exceeds total cost", share <= 0.05, f"{share:.1%} of rows")
+    if {"StartYear", "CompletionYear"} <= set(out.columns):
+        st = pd.to_numeric(out.StartYear, errors="coerce")
+        co = pd.to_numeric(out.CompletionYear, errors="coerce")
+        both = st.notna() & co.notna()
+        share = float((st[both] > co[both]).mean()) if both.any() else 0.0
+        rep.check(s, "StartYear rarely later than CompletionYear", share <= 0.05, f"{share:.1%} of rows")
     if not ref_path:
         rep.skip(s, "Distribution vs reference", "no --reference given")
         return
