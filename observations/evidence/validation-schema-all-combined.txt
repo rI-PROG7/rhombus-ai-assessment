@@ -1,0 +1,67 @@
+Input:  datasets/nswbudgetmessy-drift-schema-all-combined.csv (704 rows, 12 columns)
+Output: data-validation/outputs/nswbudgetoutput-drift-schema-all-combined.csv (704 rows, 13 columns)
+
+== Schema ==
+[PASS] All expected columns present: 13 columns
+[PASS] No unexpected columns
+[PASS] Column order kept
+[PASS] StartYear is numeric
+[PASS] StartYear has no trailing .0
+[PASS] CompletionYear is numeric
+[PASS] CompletionYear has no trailing .0
+[PASS] ETC is numeric
+[PASS] ETC has no trailing .0
+
+== Row counts ==
+[PASS] Output rows = input rows minus duplicates: 704 in -> 704 out (expected 704 after exact dedup, 704 after normalised dedup)
+[PASS] No duplicate rows in output: 0 duplicates
+
+== Cleaning rules ==
+[PASS] AgencyName: whitespace trimmed and collapsed
+[PASS] AgencyName: no control characters
+[PASS] AgencyCategory: whitespace trimmed and collapsed
+[PASS] AgencyCategory: no control characters
+[PASS] ProjectName: whitespace trimmed and collapsed
+[PASS] ProjectName: no control characters
+[PASS] Type: whitespace trimmed and collapsed
+[PASS] Type: no control characters
+[PASS] Location: whitespace trimmed and collapsed
+[PASS] Location: no control characters
+[PASS] LGA: whitespace trimmed and collapsed
+[PASS] LGA: no control characters
+[PASS] Region: whitespace trimmed and collapsed
+[PASS] Region: no control characters
+[PASS] AgencyName: no blanks or null markers
+[PASS] Type: no blanks or null markers
+[PASS] LGA: no blanks or null markers
+[PASS] Region: no blanks or null markers
+[PASS] Type: canonical values only
+[FAIL] Region: multi-region separator is ', ': 22 values, e.g. 'Metropolitan Sydney,Illawarra', 'Illawarra,South East & Tablelands,Central West & Orana', 'Metropolitan Sydney,Central Coast,Hunter,Illawarra,Central West & Orana'
+[FAIL] Region: canonical names only: 1 values, e.g. 'Sydney'
+[SKIP] LGA 'Various' rule: row alignment not guaranteed; checked per project in change log
+[PASS] DataQualityIssue column populated for some rows
+
+== Data loss ==
+[FAIL] ETC: input values kept: 521 parseable in input, 519 in output -> 2 lost; 2 non-numeric input values
+[PASS] StartYear: input values kept: 3 parseable in input, 557 in output; 557 non-numeric input values
+[PASS] CompletionYear: input values kept: 592 parseable in input, 592 in output
+
+== Change log ==
+[SKIP] Injected issues: no --changes given
+
+== Determinism ==
+[SKIP] Identical output for identical input: no --compare given
+
+== Semantic ==
+[PASS] StartYear: implausible years flagged: 1 outside 1900-2050, 1 flagged
+[PASS] CompletionYear: implausible years flagged: 1 outside 1900-2050, 1 flagged
+[PASS] AgencyCategory: known values only
+[FAIL] Columns match reference output: missing vs reference ['EstSpendTo20150630', 'Allocation201516']; new vs reference ['FundingSource', 'Budget201516']
+[FAIL] No data-quality rule silently stopped firing: rules flagged in reference but not here: {'Negative amount in Allocation201516': 3, 'EstSpendTo20150630 + Allocation201516 exceeds ETC': 3}
+[PASS] ETC: scale vs reference: median 13767 vs 13196 (1.04x)
+[SKIP] EstSpendTo20150630: scale vs reference: column missing
+[SKIP] Allocation201516: scale vs reference: column missing
+[PASS] StartYear: median vs reference: 2014 vs 2014
+[PASS] CompletionYear: median vs reference: 2017 vs 2017
+
+Summary: 39 passed, 5 failed, 5 skipped

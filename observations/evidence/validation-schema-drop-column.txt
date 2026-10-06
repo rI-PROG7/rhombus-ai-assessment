@@ -1,0 +1,69 @@
+Input:  ../datasets/nswbudgetmessy-drift-schema-drop-column.csv (704 rows, 11 columns)
+Output: outputs/nswbudgetoutput-drift-schema-drop-column.csv (698 rows, 12 columns)
+
+== Schema ==
+[PASS] All expected columns present: 12 columns
+[PASS] No unexpected columns
+[PASS] Column order kept
+[PASS] StartYear is numeric
+[PASS] StartYear has no trailing .0
+[PASS] CompletionYear is numeric
+[PASS] CompletionYear has no trailing .0
+[PASS] ETC is numeric
+[PASS] ETC has no trailing .0
+[PASS] Allocation201516 is numeric
+[PASS] Allocation201516 has no trailing .0
+
+== Row counts ==
+[PASS] Output rows = input rows minus duplicates: 704 in -> 698 out (expected 699 after exact dedup, 697 after normalised dedup)
+[PASS] No duplicate rows in output: 0 duplicates
+
+== Cleaning rules ==
+[PASS] AgencyName: whitespace trimmed and collapsed
+[PASS] AgencyName: no control characters
+[PASS] AgencyCategory: whitespace trimmed and collapsed
+[PASS] AgencyCategory: no control characters
+[PASS] ProjectName: whitespace trimmed and collapsed
+[PASS] ProjectName: no control characters
+[PASS] Type: whitespace trimmed and collapsed
+[PASS] Type: no control characters
+[PASS] Location: whitespace trimmed and collapsed
+[PASS] Location: no control characters
+[PASS] LGA: whitespace trimmed and collapsed
+[PASS] LGA: no control characters
+[PASS] Region: whitespace trimmed and collapsed
+[PASS] Region: no control characters
+[PASS] AgencyName: no blanks or null markers
+[PASS] Type: no blanks or null markers
+[PASS] LGA: no blanks or null markers
+[PASS] Region: no blanks or null markers
+[PASS] Type: canonical values only
+[FAIL] Region: multi-region separator is ', ': 21 values, e.g. 'Metropolitan Sydney,Illawarra', 'Illawarra,South East & Tablelands,Central West & Orana', 'Metropolitan Sydney,Central Coast,Hunter,Illawarra,Central West & Orana'
+[FAIL] Region: canonical names only: 1 values, e.g. 'Sydney'
+[PASS] DataQualityIssue column populated for some rows
+
+== Data loss ==
+[FAIL] ETC: input values kept: 517 parseable in input, 515 in output -> 1 lost; 2 non-numeric input values
+[FAIL] Allocation201516: input values kept: 651 parseable in input, 646 in output -> 4 lost
+[FAIL] StartYear: input values kept: 556 parseable in input, 553 in output -> 2 lost
+[PASS] CompletionYear: input values kept: 588 parseable in input, 588 in output
+
+== Change log ==
+[SKIP] Injected issues: no --changes given
+
+== Determinism ==
+[SKIP] Identical output for identical input: no --compare given
+
+== Semantic ==
+[PASS] StartYear: implausible years flagged: 1 outside 1900-2050, 1 flagged
+[PASS] CompletionYear: implausible years flagged: 1 outside 1900-2050, 1 flagged
+[PASS] AgencyCategory: known values only
+[FAIL] Columns match reference output: missing vs reference ['EstSpendTo20150630']
+[FAIL] No data-quality rule silently stopped firing: rules flagged in reference but not here: {'EstSpendTo20150630 + Allocation201516 exceeds ETC': 3}
+[PASS] ETC: scale vs reference: median 13196 vs 13196 (1.00x)
+[SKIP] EstSpendTo20150630: scale vs reference: column missing
+[PASS] Allocation201516: scale vs reference: median 3591.5 vs 3591.5 (1.00x)
+[PASS] StartYear: median vs reference: 2014 vs 2014
+[PASS] CompletionYear: median vs reference: 2017 vs 2017
+
+Summary: 41 passed, 7 failed, 3 skipped

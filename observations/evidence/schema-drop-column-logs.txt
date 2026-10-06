@@ -1,0 +1,20 @@
+Schema drift case: drop a column (EstSpendTo20150630 removed)
+Input: datasets/nswbudgetmessy-drift-schema-drop-column.csv
+Run: manual, 2026-10-06 ~9:41 PM (Australia/Sydney)
+Result: pipeline stopped at dedup_rows
+
+Log entry (copied from the Rhombus Logs panel; the "Generated code" section is truncated by the UI):
+
+{
+  "kind": "pipeline_summary",
+  "status": "error",
+  "failure": {
+    "message": "Pipeline failed at dedup_rows: LLM execution failed (code_sha=439da4d424bd): Missing columns: ['EstSpendTo20150630']\n--- Generated code ---\nimport pandas as pd\nimport numpy as np\ndef _safe_to_timedelta_wrapper(arg, *args, **kwargs):\n    try:\n        arg_series = pd.Series(arg)\n    except E…",
+    "reason": "LLM execution failed (code_sha=439da4d424bd): Missing columns: ['EstSpendTo20150630']\n--- Generated code ---\nimport pandas as pd\nimport numpy as np\ndef _safe_to_timedelta_wrapper(arg, *args, **kwargs):\n    try:\n        arg_series = pd.Series(arg)\n    except E…",
+    "nodeId": "llm_node_3",
+    "nodeLabel": "dedup_rows",
+    "nodeRef": "llm_e7f2f6c2e0d255b5e7976a597805a1cc"
+  },
+  "nodeId": "llm_node_3",
+  "nodeName": "dedup_rows"
+}
