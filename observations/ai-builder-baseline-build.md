@@ -2,7 +2,7 @@
 
 ## What I did
 
-Uploaded `datasets/baseline.csv` (704 rows, 54 injected issues, see `datasets/baseline_changes.csv`)
+Uploaded `datasets/nswbudgetmessy.csv` (704 rows, 54 injected issues, see `datasets/nswbudgetmessy_changes.csv`)
 and sent the cleaning prompt in [ai-builder-prompt.md](evidence/ai-builder-prompt.md) to the AI builder.
 
 ## Attempt 1
@@ -155,7 +155,6 @@ before any cleaning node runs. No warning is shown.
 This is why the builder's `_orig_` snapshot could not help: by the time `numeric_convert` runs, the raw text is
 already gone. No cleaning prompt can recover these values; the loss happens in the platform's ingestion step.
 
-![Input preview showing null](evidence/input-dollar-value-nulled.png)
 
 ### Takeaway (fix attempt 2)
 

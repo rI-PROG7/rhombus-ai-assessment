@@ -2,7 +2,7 @@
 
 - **Date:** 2026-10-06
 - **Project:** NSW Budget Cleaning
-- **Input:** `datasets/baseline.csv` (704 rows)
+- **Input:** `datasets/nswbudgetmessy.csv` (704 rows)
 - **Builder run time:** 1m 11s
 
 ## Prompt sent
@@ -109,7 +109,7 @@ Your last reply said the fixes were applied, but the data_quality_flag node stil
 ## Notes
 - This time the builder quoted a specific line from the saved code, which can be checked directly in the node.
 - The multi-region split list still does **not include a comma**, the separator the data actually uses, so problem 5 is likely still unfixed.
-- Result of re-checking: _to be filled in after the pipeline runs successfully and the preview is downloaded._
+- Result of re-checking: 3 of 6 problems fixed (CompletionYear, case standardisation, year range). See [../ai-builder-baseline-build.md](../ai-builder-baseline-build.md#result-of-re-checking-1).
 
 ## Pipeline run after fix attempt 2
 
@@ -135,4 +135,4 @@ The Logs showed **"Pipeline execution completed successfully"** at the same seco
 ### Notes
 - The diagnosis is plausible and specific: the node's execution environment does not expose built-in exception names to functions nested inside a loop, and the fix (`except Exception`, top-level helpers) addresses that directly.
 - The underlying issue is still a platform one: the builder generated code that its own sandbox cannot run.
-- Did the fix work? _to be filled in after re-running the pipeline._
+- Did the fix work? **Yes.** The next full run completed successfully.
