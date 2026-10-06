@@ -99,3 +99,69 @@ The builder replied "All three compiles succeeded … fixes applied to the exist
 specific code changes (`_orig_` columns, a new year range) that do not exist in the node. The canvas gave no
 sign that anything was wrong. Only inspecting the node's code and diffing the output exposed it.
 This is a higher-severity finding than attempt 1: the platform reported a fix as applied when it was not.
+
+## Fix attempt 2
+
+### What I asked for
+
+Told the builder its previous fix had not been saved (old year range, no `_orig_` columns, unchanged output)
+and asked it to update and save the three nodes, then quote the year-range line from the saved code as proof.
+Full prompt and reply: [ai-builder-prompt.md → Fix attempt 2](evidence/ai-builder-prompt.md#fix-attempt-2).
+
+### What the builder reported
+
+- Code "confirmed saved", with `last_executed_code` matching what was written.
+- Quoted year-range line: `mask = df[col].notna() & ((df[col] < 1900) | (df[col] > 2050))`.
+- Same three node changes as attempt 1, now with details: 14 Region and 7 Type mapping entries,
+  `_orig_` snapshots before conversion, `$`/comma stripping, `YYYY-YY` parsing, and CompletionYear no longer wiped.
+
+### Early observations (before re-checking the data)
+
+- Asking for a quoted line gives a concrete claim to verify in the node itself, rather than relying on the summary.
+- The split list for multi-region values still omits the comma, so problem 5 is likely still unfixed.
+
+### Pipeline run and chatbot fix
+
+The saved code did change this time, but the first run failed at `numeric_convert` with
+`name 'TypeError' is not defined`, while the Logs also showed "Pipeline execution completed successfully"
+at the same second. Using **Ask Chatbot** on the error (no extra hints), the chatbot diagnosed that built-in
+exception names were not available inside nested functions in the execution environment, moved the helpers to
+top level and replaced `except (ValueError, TypeError)` with `except Exception`. **The fix worked:** the next run
+completed successfully. Details: [ai-builder-prompt.md → Fix attempt 2](evidence/ai-builder-prompt.md#fix-attempt-2).
+
+### Result of re-checking
+
+Downloaded preview: [`ai-build-v3_preview.csv`](../data-validation/outputs/ai-build-v3_preview.csv) (698 rows, 13 columns).
+
+| #   | Problem | Fixed? |
+| --- | ------- | ------ |
+| 1   | CompletionYear wiped | ✅ Values restored (110 blank, matching the genuinely blank inputs) |
+| 2   | Formatted amounts and years nulled | ❌ `$57,366` (row 233), `22,647`, `2015-16` still blank and unflagged |
+| 3   | TBC / TBA not flagged | ❌ Rows 563, 214 still blank, no flag |
+| 4   | Region / Type case not standardised | ✅ `Metropolitan Sydney`, `Hunter`, `Work-In-Progress` everywhere |
+| 5   | Region separator | ❌ Still `,` with no space (21 values); one standalone `Sydney` inside a list unchanged |
+| 6   | Year range false positives | ✅ Only 1899 and 2105 flagged; no 1990s false positives |
+
+Side effect of fix 1: the two swapped start/completion years are now flagged correctly
+("StartYear later than CompletionYear"), which could never fire before.
+
+### Why 2 and 3 still fail: data lost at upload (confirmed)
+
+The **Data Input** node's own preview already shows `null` for Byron Central Hospital's `Allocation201516`
+(page 12, row 233), where the uploaded CSV contains `$57,366`. Rhombus tagged the column as **Numeric** on upload
+and silently discarded every value it could not parse as a number (`$57,366`, `22,647`, `2015-16`, `TBC`, `TBA`),
+before any cleaning node runs. No warning is shown.
+
+This is why the builder's `_orig_` snapshot could not help: by the time `numeric_convert` runs, the raw text is
+already gone. No cleaning prompt can recover these values; the loss happens in the platform's ingestion step.
+
+![Input preview showing null](evidence/input-dollar-value-nulled.png)
+
+### Takeaway (fix attempt 2)
+
+Three of six problems were fixed and the chatbot correctly diagnosed and fixed the crash it introduced.
+The separator fix was predictable from the builder's own reply (no comma in the split list). Two problems
+are caused by silent data loss at upload, outside the builder's control.
+
+**Decision:** stopped here to conserve AI builder credits for the drift cases. The pipeline runs, and the
+remaining defects are accepted as the baseline and tracked by the validator.
